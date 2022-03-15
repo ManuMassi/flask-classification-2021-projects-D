@@ -18,8 +18,12 @@
             visibility: hidden;
             background: #686b70;
         }
-    </style>
 
+
+
+
+
+    </style>
     <div class="row">
         <div class="col">
             <div class="card">
@@ -40,10 +44,11 @@
                 </div>
 
 
-                <a class="btn btn-dark" href="/classifications" role="button">Back</a>
+                <a class="btn btn-dark" role="button" href="" onclick="location.replace(window.location.href)">Back</a>
 
                 <a class="btn btn-dark download-btn" href={{ url_for("json_results", job_id=jobID) }} role="button">Download results</a>
                 <a class="btn btn-dark download-btn" id="download-plot-btn" role="button">Download plot</a>
+
             </div>
         </div>
     </div>
