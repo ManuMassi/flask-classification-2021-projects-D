@@ -26,8 +26,10 @@ def classificationsUpload():
 
         # Saving uploaded image
         file = request.files['file']
-        file.save('app/static/imagenet_subset/uploaded_' + file.filename)
-        image_id = file.filename
+        filename = 'uploaded_' + file.filename
+        file.save('app/static/imagenet_subset/' + filename)
+
+        image_id = filename
 
         redis_url = Configuration.REDIS_URL
         redis_conn = redis.from_url(redis_url)
@@ -45,9 +47,13 @@ def classificationsUpload():
 
     # otherwise, it is a get request and should return the
     # image and model selector
+    else:
 
-    for file in os.listdir("app/static/imagenet_subset"):
-        if file.startswith("uploaded"):
-            os.remove("app/static/imagenet_subset/" + file)
+        for file in os.listdir("app/static/imagenet_subset"):
+            if file.startswith("uploaded"):
+                try:
+                    os.remove("app/static/imagenet_subset/" + file)
+                except FileNotFoundError:
+                    pass
 
-    return render_template('classification_upload.html', form=form)
+        return render_template('classification_upload.html', form=form)
